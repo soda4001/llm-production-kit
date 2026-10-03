@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Production Kit — waitlist</title>
+<meta name="description" content="A tested TypeScript reference implementation and handbook for running LLM features in production. In development, not yet for sale.">
+<style>
+  :root {
+    --bg: #fbfbf9; --fg: #1d1f21; --muted: #5c6168; --line: #dcdcd6;
+    --card: #ffffff; --accent: #1f5f4a; --accent-fg: #ffffff; --warn-bg: #fff6e0; --warn-fg: #6b4a00;
+    --ok-bg: #e6f3ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141615; --fg: #e8e9e6; --muted: #9aa09b; --line: #2c312e;
+      --card: #1b1e1c; --accent: #5fbf9b; --accent-fg: #0d1512; --warn-bg: #2a2410; --warn-fg: #e6c872;
+      --ok-bg: #17271f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: clamp(1.7rem, 4.5vw, 2.3rem); line-height: 1.2; margin: 12px 0 16px; }
+  h2 { font-size: 1.15rem; margin: 40px 0 12px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+  .eyebrow { display: inline-block; font-size: .8rem; padding: 3px 10px; border-radius: 999px; background: var(--warn-bg); color: var(--warn-fg); }
+  .lede { font-size: 1.08rem; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+  .tag { font-size: .78rem; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap; }
+  .tag.done { background: var(--ok-bg); border-color: transparent; }
+  ul { padding-left: 1.2em; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  label { display: block; font-weight: 600; margin: 14px 0 6px; font-size: .95rem; }
+  label:first-child { margin-top: 0; }
+  .hint { font-weight: 400; color: var(--muted); font-size: .85rem; }
+  input[type=email], select, textarea {
+    width: 100%; padding: 10px 12px; font: inherit; color: var(--fg); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 8px;
+  }
+  textarea { min-height: 84px; resize: vertical; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .88rem; color: var(--muted); }
+  .consent input { margin-top: 4px; }
+  button { margin-top: 18px; width: 100%; padding: 12px; font: inherit; font-weight: 600; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-fg); cursor: pointer; }
+  button[disabled] { opacity: .5; cursor: not-allowed; }
+  .status { margin-top: 12px; font-size: .92rem; min-height: 1.4em; }
+  .hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+  details { font-size: .88rem; color: var(--muted); margin-top: 14px; }
+  summary { cursor: pointer; }
+  footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">In development · not for sale yet · no payment is taken on this page</span>
+  <h1>A tested reference implementation for running LLM features in production</h1>
+  <p class="lede">Cost limits, output validation, regression evals and PII-safe logging, as TypeScript code with tests you can run, plus a handbook that explains the trade-offs. For solo developers and small teams shipping LLM features.</p>
+
+  <h2>What exists today, and what does not</h2>
+  <table>
+    <thead><tr><th>Module</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Per-key quota with reserve → commit/release holds</td><td><span class="tag done">Released, open source (MIT)</span></td></tr>
+      <tr><td>Structured-output validation with retry and fallback</td><td><span class="tag">Planned</span></td></tr>
+      <tr><td>Regression eval harness that runs in CI</td><td><span class="tag">Planned</span></td></tr>
+      <tr><td>PII redaction before logging</td><td><span class="tag">Planned</span></td></tr>
+      <tr><td>Provider-agnostic adapter</td><td><span class="tag">Planned</span></td></tr>
+      <tr><td>Handbook and pre-launch checklist</td><td><span class="tag">Planned</span></td></tr>
+    </tbody>
+  </table>
+  <p id="repo-line" hidden>The first module is free: <a id="repo-link" href="#">llm-quota-guard on GitHub</a>. Its behavior is specified by tests you can run yourself.</p>
+
+  <h2>Planned pricing (not final)</h2>
+  <p>Solo licence around <strong>$99</strong>, team licence around <strong>$249</strong>, one-time. These are the numbers being tested, not an offer. Whether the kit gets built depends on the answers to the form below.</p>
+
+  <h2>Join the waitlist</h2>
+  <form id="waitlist" novalidate>
+    <div class="hp" aria-hidden="true"><label>Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+
+    <label for="price">If it did what is described above, what is the most you would pay once? <span class="hint">(required; this is a survey, not a commitment)</span></label>
+    <select id="price" name="price" required>
+      <option value="">Select…</option>
+      <option value="under_49">Under $49</option>
+      <option value="49_98">$49 – $98</option>
+      <option value="99_149">$99 – $149</option>
+      <option value="150_249">$150 – $249</option>
+      <option value="over_249">More than $249</option>
+      <option value="would_not_buy">I would not buy this</option>
+    </select>
+
+    <label for="problem">What is the hardest part of running an LLM feature in production for you? <span class="hint">(optional)</span></label>
+    <textarea id="problem" name="problem" maxlength="1000"></textarea>
+
+    <label class="consent" for="consent">
+      <input id="consent" name="consent" type="checkbox" required>
+      <span>I agree that my answers and email address are stored to inform me about this product's availability and to measure demand. I can withdraw this at any time.</span>
+    </label>
+
+    <details>
+      <summary>Privacy notice</summary>
+      <p><strong>Collected:</strong> email address, your price answer, and the optional free text. <strong>Purpose:</strong> notifying you about availability of this product and measuring demand. <strong>Retention:</strong> the site operator keeps a copy until 30 days after the launch announcement, or 12 months from submission, whichever is earlier; earlier on request. The form service keeps its own archive for a limited time. <strong>Recipients:</strong> the form-processing service that receives submissions (<span id="processor-name">to be named before launch</span>, which may process data outside your country) and the site operator; no other third parties, no advertising use. <strong>Your rights:</strong> access, correction and deletion on request at <span id="contact-line">the contact address below</span>. Declining to submit has no consequence.</p>
+    </details>
+
+    <button id="submit" type="submit" disabled>Join the waitlist</button>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+  </form>
+
+  <footer>
+    <p>Transparency: this product and its documentation are produced with AI assistance (Claude). Every behavioral claim is meant to be backed by a test or a script you can run; if one is not, treat it as unverified.</p>
+    <p>No income, performance or cost-saving guarantees are made. <span id="contact-footer"></span></p>
+  </footer>
+</main>
+
+<script>
+  // Fill these in before publishing. While `endpoint` is empty the form stays disabled.
+  const CONFIG = {
+    endpoint: "https://formspree.io/f/xaenrabr", // Formspree form (JSON POST: { email, price, problem, consent, _gotcha })
+    repoUrl: "https://github.com/soda4001/llm-quota-guard",
+    contactEmail: "kit@cravveo.com",  // address for data requests
+    processorName: "Formspree"  // name of the form-processing service
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const form = $("waitlist"), submit = $("submit"), status = $("status");
+
+  if (CONFIG.repoUrl) { $("repo-link").href = CONFIG.repoUrl; $("repo-line").hidden = false; }
+  if (CONFIG.contactEmail) {
+    $("contact-line").textContent = CONFIG.contactEmail;
+    $("contact-footer").textContent = "Contact: " + CONFIG.contactEmail;
+  }
+  if (CONFIG.processorName) $("processor-name").textContent = CONFIG.processorName;
+
+  if (!CONFIG.endpoint) {
+    status.textContent = "The waitlist is not connected yet.";
+  } else {
+    submit.disabled = false;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!CONFIG.endpoint) return;
+    const data = {
+      email: form.email.value.trim(),
+      price: form.price.value,
+      problem: form.problem.value.trim(),
+      consent: form.consent.checked,
+      _gotcha: form._gotcha.value
+    };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { status.textContent = "Please enter a valid email address."; return; }
+    if (!data.price) { status.textContent = "Please choose an answer for the price question."; return; }
+    if (!data.consent) { status.textContent = "Please tick the consent box to join."; return; }
+    if (data._gotcha) return; // honeypot: silently drop bots
+
+    submit.disabled = true;
+    status.textContent = "Sending…";
+    try {
+      const res = await fetch(CONFIG.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      form.reset();
+      status.textContent = "Thank you. You are on the list. No payment was taken.";
+    } catch (error) {
+      status.textContent = "Submission failed. Please try again later.";
+      submit.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
